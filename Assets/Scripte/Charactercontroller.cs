@@ -107,7 +107,7 @@ public class Charactercontroller : MonoBehaviour
 
         if (transform.position.y < height)
         {
-            rb2d.gravityScale += gravityPlus;
+            rb2d.gravityScale *= gravityPlus;
 
         }
         height = transform.position.y;

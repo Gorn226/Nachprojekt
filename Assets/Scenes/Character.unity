@@ -276,7 +276,7 @@ MonoBehaviour:
   shield: {fileID: 1803044989}
   sword: {fileID: 1709958791}
   height: 0
-  gravityPlus: 2
+  gravityPlus: 1.10000002
 --- !u!1 &1419847117
 GameObject:
   m_ObjectHideFlags: 0
