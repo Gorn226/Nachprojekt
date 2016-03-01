@@ -21,20 +21,15 @@ public class Enemy : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D otherObject)
     {
-        Debug.Log("Test: " + otherObject.name);
         if (otherObject.tag == "Grenze")
         {
             turnSpeed = 0;
             StartCoroutine(turn());
-            Debug.Log("Davor: " + enemySpeed);
             enemySpeed *= -1;
-            Debug.Log("Danach: " + enemySpeed);
         }
         if (otherObject.gameObject.tag == "Sword" && lives > 1)
         {
-            Debug.Log("Davor: " + lives);
             lives--;
-            Debug.Log("Danach: " + lives);
         }
         else if (lives == 1)
             Destroy(gameObject);
