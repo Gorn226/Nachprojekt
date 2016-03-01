@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D otherObject)
     {
-        Debug.Log("Test: " + otherObject.gameObject.name);
-        if (otherObject.gameObject.tag == "Grenze")
+        Debug.Log("Test: " + otherObject.name);
+        if (otherObject.tag == "Grenze")
         {
             turnSpeed = 0;
             StartCoroutine(turn());
