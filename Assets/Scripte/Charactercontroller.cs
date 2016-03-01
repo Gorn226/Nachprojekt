@@ -17,7 +17,7 @@ public class Charactercontroller : MonoBehaviour
     public float jumpForce = 100f;
     public Vector3 groundCheck;
     public int health = 3;
-    public float invinTime =0.5f;
+    public float invinTime =0.5f; // Zeit wie Lange man unverwuntbar ist
     public bool armed = false;
     public bool hasShield = true;
     public GameObject shield;
@@ -102,7 +102,7 @@ public class Charactercontroller : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     { 
         
-        Enemy enemy = (Enemy)col.gameObject.GetComponent<Enemy>();
+        Enemy enemy = (Enemy)col.gameObject.GetComponent("Enemy");
         Debug.Log(enemy.name);
         if (col.gameObject.tag == "Enemy"&& st ==state.normal)
         {
@@ -137,24 +137,26 @@ public class Charactercontroller : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
 
+        // Schneller fallen
         if (transform.position.y < height)
         {
             rb2d.gravityScale *= gravityPlus;
-
         }
         height = transform.position.y;
 
         if (h * rb2d.velocity.x < maxSpeed)
             rb2d.AddForce(Vector2.right * h * moveForce);
-
+        //maximale Geschwindigkeit
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
+        // Flipper
         if (h > 0 && !facingRight)
             Flip();
         else if (h < 0 && facingRight)
             Flip();
 
+        // Jump
         if (jump)
         {
 
