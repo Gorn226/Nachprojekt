@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour {
 
     public int enemySpeed = 0;
     public int turnSpeed = 1;
+    public int lives = 3;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -28,6 +30,14 @@ public class Enemy : MonoBehaviour {
             enemySpeed *= -1;
             Debug.Log("Danach: " + enemySpeed);
         }
+        if (otherObject.gameObject.tag == "Sword" && lives > 1)
+        {
+            Debug.Log("Davor: " + lives);
+            lives--;
+            Debug.Log("Danach: " + lives);
+        }
+        else if (lives == 1)
+            Destroy(gameObject);
     }
 
     IEnumerator turn()
