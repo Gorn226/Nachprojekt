@@ -670,7 +670,7 @@ MonoBehaviour:
   jump: 0
   moveForce: 600
   maxSpeed: 5
-  jumpForce: 2000
+  jumpForce: 8000
   groundCheck: {x: 0, y: 0, z: 0}
   health: 3
   invinTime: 0.5
@@ -679,7 +679,7 @@ MonoBehaviour:
   shield: {fileID: 830040167}
   sword: {fileID: 180847872}
   height: 0
-  gravityPlus: 1
+  gravityPlus: 1.14999998
 --- !u!50 &1217568842
 Rigidbody2D:
   serializedVersion: 2
