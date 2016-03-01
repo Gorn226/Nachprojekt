@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Grenze
   - Item
+  - Sword
+  - Shield
+  - Enemy
   layers:
   - Default
   - TransparentFX
