@@ -102,10 +102,10 @@ public class Charactercontroller : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     { 
         
-        Enemy enemy = (Enemy)col.gameObject.GetComponent("Enemy");
-        Debug.Log(enemy.name);
+        
         if (col.gameObject.tag == "Enemy"&& st ==state.normal)
         {
+            Enemy enemy = (Enemy)col.gameObject.GetComponent("Enemy");
            
             if (!hitShield(enemy))
             {
@@ -135,6 +135,7 @@ public class Charactercontroller : MonoBehaviour
     }
     void FixedUpdate()
     {
+        
         float h = Input.GetAxis("Horizontal");
 
         // Schneller fallen
