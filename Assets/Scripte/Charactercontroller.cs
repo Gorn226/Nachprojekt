@@ -4,7 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Charactercontroller : MonoBehaviour
 {
-
+    enum state { normal, invincible};
+    state st = state.normal;
     [HideInInspector]
     public bool facingRight = true;
     [HideInInspector]
@@ -14,6 +15,7 @@ public class Charactercontroller : MonoBehaviour
     public float jumpForce = 100f;
     public Vector3 groundCheck;
     public int health = 3;
+    public float invinTime =0.5f;
 
     public bool hasShield = true;
     public GameObject shield;
@@ -22,9 +24,10 @@ public class Charactercontroller : MonoBehaviour
     public GameObject sword;
     bool hitting = false;
 
-
     private bool grounded = false;
     Rigidbody2D rb2d;
+    public float height;
+    public float gravityPlus =0f;
     // Use this for initialization
     void Awake()
     {
@@ -42,10 +45,18 @@ public class Charactercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+      
+
         grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
+
+        }
+        if (grounded)
+        {
+            rb2d.gravityScale = 1;
         }
         if (hasShield == true && Input.GetButton("Shield") && hitting == false)
         {
@@ -62,6 +73,11 @@ public class Charactercontroller : MonoBehaviour
 
             StartCoroutine(swordBlow());
         }
+        if (health <= 0)
+        {
+            Application.LoadLevel("Endscreen");
+        }
+        
     }
     IEnumerator swordBlow()
     {
@@ -71,11 +87,30 @@ public class Charactercontroller : MonoBehaviour
         sword.SetActive(false);
         hitting = false;
     }
+    IEnumerator invincible()
+    {
+        st = state.invincible;
+        yield return new WaitForSeconds(invinTime);
+        st = state.normal;
+    }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy"&& st ==state.normal)
+        {
+            health--;
+            StartCoroutine(invincible());
+        }
+    }
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
 
+        if (transform.position.y < height)
+        {
+            rb2d.gravityScale += gravityPlus;
 
+        }
+        height = transform.position.y;
 
         if (h * rb2d.velocity.x < maxSpeed)
             rb2d.AddForce(Vector2.right * h * moveForce);
