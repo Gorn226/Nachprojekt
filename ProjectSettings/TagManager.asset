@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Grenze
+  - Enemy
+  - Sword
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -14,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 

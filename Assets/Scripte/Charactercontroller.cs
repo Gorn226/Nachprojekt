@@ -57,8 +57,6 @@ public class Charactercontroller : MonoBehaviour
             shieldpresst = false;
             shield.SetActive(false);
         }
-        Debug.Log("Hitting " + hitting);
-        Debug.Log("shieldpresst " + shieldpresst);
         if (Input.GetButtonDown("Sword") && shieldpresst == false && hitting == false)
         {
 
