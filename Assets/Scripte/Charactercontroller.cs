@@ -5,8 +5,7 @@ using System.Collections;
 public class Charactercontroller : MonoBehaviour
 {
     enum state { normal, invincible};
-    
-    
+
     state st = state.normal;
     [HideInInspector]
     public bool facingRight = true;
@@ -39,7 +38,7 @@ public class Charactercontroller : MonoBehaviour
     }
     void Start()
     {
-        groundCheck = new Vector3(0, transform.localScale.y * 0.5f + 0.1f, 0);
+        groundCheck = new Vector3(0, transform.localScale.y * 0.5f + 1f, 0);
         shield.SetActive(false);
         sword.SetActive(false);
     }
@@ -47,9 +46,6 @@ public class Charactercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-      
-
         grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
         if (Input.GetButtonDown("Jump") && grounded)
         {
