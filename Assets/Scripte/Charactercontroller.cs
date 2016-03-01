@@ -5,6 +5,8 @@ using System.Collections;
 public class Charactercontroller : MonoBehaviour
 {
     enum state { normal, invincible};
+    
+    
     state st = state.normal;
     [HideInInspector]
     public bool facingRight = true;
@@ -16,7 +18,7 @@ public class Charactercontroller : MonoBehaviour
     public Vector3 groundCheck;
     public int health = 3;
     public float invinTime =0.5f;
-
+    public bool armed = false;
     public bool hasShield = true;
     public GameObject shield;
     bool shieldpresst = false;
@@ -60,11 +62,13 @@ public class Charactercontroller : MonoBehaviour
         }
         if (hasShield == true && Input.GetButton("Shield") && hitting == false)
         {
+            armed = true;
             shieldpresst = true;
             shield.SetActive(true);
         }
         if (shieldpresst == true && !Input.GetButton("Shield"))
         {
+            armed = false;
             shieldpresst = false;
             shield.SetActive(false);
         }
@@ -81,11 +85,13 @@ public class Charactercontroller : MonoBehaviour
     }
     IEnumerator swordBlow()
     {
+        armed = true;
         sword.SetActive(true);
         hitting = true;
         yield return new WaitForSeconds(1.5f);
         sword.SetActive(false);
         hitting = false;
+        armed = false;
     }
     IEnumerator invincible()
     {
@@ -94,12 +100,38 @@ public class Charactercontroller : MonoBehaviour
         st = state.normal;
     }
     void OnTriggerEnter2D(Collider2D col)
-    {
+    { 
+        
+        Enemy enemy = (Enemy)col.gameObject.GetComponent<Enemy>();
+        Debug.Log(enemy.name);
         if (col.gameObject.tag == "Enemy"&& st ==state.normal)
         {
-            health--;
-            StartCoroutine(invincible());
+           
+            if (!hitShield(enemy))
+            {
+                health--;
+                StartCoroutine(invincible());
+            }
         }
+    }
+    bool hitShield(Enemy enemy) // or Sword
+    {
+        
+        float div =  enemy.transform.position.x-transform.position.x;   
+        // div neg => gegner links vom Spieler; div pos => Gegner rechts vom Spieler
+        if ((facingRight && div < 0)||(!facingRight&&div>0))
+        {
+            // Gegner von hinten
+            return false;
+        }
+        if (armed)
+        {
+            // Gegner in der richtigen Richtung aber mit Schwert
+            return true;
+        }
+        // Gegner von vorne ohne Schwert.
+        return false;
+
     }
     void FixedUpdate()
     {
