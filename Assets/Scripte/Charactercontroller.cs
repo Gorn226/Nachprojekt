@@ -55,6 +55,10 @@ public class Charactercontroller : MonoBehaviour
             jump = true;
 
         }
+        if (Input.GetButtonDown("OP1") && Input.GetButtonDown("OP2"))
+        {
+            Application.LoadLevel("Sieg");
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.LoadLevel("Menü");
