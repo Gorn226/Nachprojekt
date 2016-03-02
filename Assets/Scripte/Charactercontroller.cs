@@ -53,6 +53,10 @@ public class Charactercontroller : MonoBehaviour
             jump = true;
 
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.LoadLevel("Menü");
+        }
         if (grounded)
         {
             rb2d.gravityScale = 1;
