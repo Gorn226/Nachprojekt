@@ -5,8 +5,8 @@ using System.Collections;
 public class Charactercontroller : MonoBehaviour
 {
     enum state { normal, invincible};
-    
-    
+
+    public GameObject camera;
     state st = state.normal;
     [HideInInspector]
     public bool facingRight = true;
@@ -111,6 +111,7 @@ public class Charactercontroller : MonoBehaviour
             if (!hitShield(enemy))
             {
                 health--;
+                camera.gameObject.GetComponent<Heartskript>().setHearts(health);
                 hitAway(enemy);
                 StartCoroutine(invincible());
                 
