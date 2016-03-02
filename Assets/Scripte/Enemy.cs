@@ -3,18 +3,18 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+    enum state {normal, invincible}
+    private state st = state.normal;
     public float enemySpeedstart=1; 
     private float enemySpeed;
     public int turnSpeed = 1;
     public int lives = 3;
     public float wasHitForce = 5000;
-    Rigidbody2D rb2d;
     public float enemyHitSpeed =4;
 	// Use this for initialization
     void Awake()
     {
         enemySpeed = enemySpeedstart;
-        rb2d = GetComponent<Rigidbody2D>();
     }
     void Start () {
 	
@@ -36,10 +36,11 @@ public class Enemy : MonoBehaviour {
             StartCoroutine(turn());
             enemySpeed *= -1;
         }
-        if (otherObject.gameObject.tag == "Sword" && lives > 0)
+        if (otherObject.gameObject.tag == "Sword" && lives > 0&&st ==state.normal)
         {
             lives--;
             enemySpeed = enemyHitSpeed;
+            StartCoroutine(invincible());
             
         }
         else if (lives == 0)
@@ -52,7 +53,12 @@ public class Enemy : MonoBehaviour {
             enemySpeed -= 0.1f;
         }
     }
-
+    IEnumerator invincible()
+    {
+        st = state.invincible;
+        yield return new WaitForSeconds(1f);
+        st = state.normal;
+    }
     IEnumerator turn()
     {
         yield return new WaitForSeconds(1.5f);
