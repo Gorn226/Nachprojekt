@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
                 case Item.itemType.Pot:
                     Slot4.transform.GetChild(0).GetComponent<Image>().sprite = col.GetComponent<Item>().itemIcon;
                     //potInventory.Add(col.gameObject.GetComponent<Item>());
-                    potInventory.Add(col.gameObject.GetComponent<Item>());
+                    potInventory.Add(col.gameObject.GetComponent<Item>().);
                     break;
             }
         Destroy(col.gameObject);
