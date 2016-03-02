@@ -7,12 +7,13 @@ public class Enemy : MonoBehaviour
     enum state { normal, invincible }
     private state st = state.normal;
     public float enemySpeedstart = 2;
-    private float enemySpeed;
+    public float enemySpeed;
     public int turnSpeed = 1;
     public int lives = 3;
     public float wasHitForce = 5000;
     public float enemyHitSpeed = 4;
     private bool OnHit =false;
+
     // Use this for initialization
     void Awake()
     {
