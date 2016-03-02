@@ -32,6 +32,9 @@ public class Charactercontroller : MonoBehaviour
     public float gravityPlus =0f;
 
     public float wasHitForce=5000;
+
+    Animator animator;
+
     // Use this for initialization
     void Awake()
     {
@@ -44,6 +47,9 @@ public class Charactercontroller : MonoBehaviour
         groundCheck = new Vector3(0, transform.localScale.y * 0.5f + 0.5f, 0);
         shield.SetActive(false);
         sword.SetActive(false);
+        animator = GetComponent<Animator>();
+        animator.SetBool("hitting", hitting);
+        animator.SetBool("grounded", grounded);
     }
 
     // Update is called once per frame

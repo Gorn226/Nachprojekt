@@ -479,6 +479,7 @@ GameObject:
   - 50: {fileID: 643122377}
   - 114: {fileID: 643122376}
   - 212: {fileID: 643122379}
+  - 95: {fileID: 643122380}
   m_Layer: 0
   m_Name: Charakter
   m_TagString: Player
@@ -505,7 +506,7 @@ MonoBehaviour:
   jumpForce: 12000
   groundCheck: {x: 0, y: 0, z: 0}
   health: 6
-  invinTime: 5
+  invinTime: 0.5
   armed: 0
   hasShield: 1
   shield: {fileID: 309095397}
@@ -574,6 +575,23 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!95 &643122380
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643122375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e35985f393025343b21c8cfc40b6e47, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &643122381
 Transform:
   m_ObjectHideFlags: 0
@@ -1215,9 +1233,9 @@ GameObject:
   - 4: {fileID: 1443998876}
   - 212: {fileID: 1443998875}
   - 114: {fileID: 1443998874}
-  - 61: {fileID: 1443998878}
   - 50: {fileID: 1443998877}
   - 95: {fileID: 1443998879}
+  - 60: {fileID: 1443998878}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1301,8 +1319,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1443998878
-BoxCollider2D:
+--- !u!60 &1443998878
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1312,9 +1330,20 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.0022644221, y: 0.034684684}
-  serializedVersion: 2
-  m_Size: {x: 0.28551418, y: 0.57063067}
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 0.053001236, y: 0.20692027}
+      - {x: -0.0039296597, y: 0.23724687}
+      - {x: -0.14999999, y: 0.14999999}
+      - {x: -0.14999999, y: -0.06}
+      - {x: -0.12, y: -0.19999999}
+      - {x: -0.08, y: -0.26}
+      - {x: -0.049999997, y: -0.29}
+      - {x: 0.07, y: -0.29}
+      - {x: 0.14999999, y: -0.11}
+      - {x: 0.15448436, y: 0.14666276}
+      - {x: 0.14209303, y: 0.15382789}
 --- !u!95 &1443998879
 Animator:
   serializedVersion: 3
