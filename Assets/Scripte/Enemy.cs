@@ -9,10 +9,11 @@ public class Enemy : MonoBehaviour
     public float enemySpeedstart = 2;
     public float enemySpeed;
     public int turnSpeed = 1;
-    public int lives = 3;
+    public int lives = 0;
     public float wasHitForce = 5000;
     public float enemyHitSpeed = 4;
-    private bool OnHit =false;
+    private bool OnHit = true;
+    Animator animator;
 
     // Use this for initialization
     void Awake()
@@ -21,25 +22,29 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         float amToMove = enemySpeed * Time.deltaTime * turnSpeed;
+        animator.SetFloat("turnSpeed", turnSpeed);
         transform.Translate(Vector3.right * amToMove);
-
+        animator.SetBool("OnHit", OnHit);
+        //LoseLife();
 
     }
 
     void OnTriggerEnter2D(Collider2D otherObject)
     {
         if (otherObject.tag == "Grenze")
-        {
+        {        
             turnSpeed = 0;
             StartCoroutine(turn());
             enemySpeed *= -1;
+
+            
         }
         if (otherObject.gameObject.tag == "Sword" && lives > 0 && st == state.normal)
         {
@@ -54,9 +59,23 @@ public class Enemy : MonoBehaviour
             StartCoroutine(invincible());
 
         }
-        else if (lives == 0)
-            Destroy(gameObject);
+        else if (lives == 0) {
+            turnSpeed = 0;
+            transform.GetComponent<BoxCollider2D>().enabled = false;
+            //StartCoroutine(timeTillDeath());
+            //Destroy(gameObject);
+        }
     }
+
+    //void LoseLife()
+    //{
+    //    StartCoroutine(timeTillDeath());
+    //    if (lives <= 0)
+    //    {
+    //        turnSpeed = 0;
+    //        transform.GetComponent<BoxCollider2D>().enabled = false;
+    //    }
+    //}
 
     private bool playerLeft(Collider2D ob)
     {
@@ -89,6 +108,14 @@ public class Enemy : MonoBehaviour
     IEnumerator turn()
     {
         yield return new WaitForSeconds(1.5f);
+        transform.localScale = new Vector3(transform.localScale.x * (-1), transform.localScale.y,
+                                               transform.localScale.z);
         turnSpeed = 1;
     }
+
+    //IEnumerator timeTillDeath()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    lives--;
+    //}
 }
