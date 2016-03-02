@@ -140,7 +140,7 @@ public class Charactercontroller : MonoBehaviour
             // Gegner von hinten
             return false;
         }
-        if (armed && enemy.transform.position.y + enemy.transform.localScale.y * 0.2 >= transform.position.y && enemy.transform.position.y - enemy.transform.localScale.y * 0.2 <= transform.position.y)
+        if (armed && enemy.transform.position.y + enemy.transform.localScale.y * 0.8f >= transform.position.y && enemy.transform.position.y - enemy.transform.localScale.y * 0.8f <= transform.position.y)
         {
             // Gegner in der richtigen Richtung aber mit Schwert
             return true;
