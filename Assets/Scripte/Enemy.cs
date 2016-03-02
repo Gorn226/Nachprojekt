@@ -9,10 +9,10 @@ public class Enemy : MonoBehaviour
     public float enemySpeedstart = 2;
     public float enemySpeed;
     public int turnSpeed = 1;
-    public int lives = 0;
+    public int lives = 3;
     public float wasHitForce = 5000;
     public float enemyHitSpeed = 4;
-    private bool OnHit = true;
+    private bool OnHit = false;
     Animator animator;
 
     // Use this for initialization
