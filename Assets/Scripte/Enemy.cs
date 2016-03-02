@@ -6,12 +6,13 @@ public class Enemy : MonoBehaviour
 
     enum state { normal, invincible }
     private state st = state.normal;
-    public float enemySpeedstart = 1;
+    public float enemySpeedstart = 2;
     private float enemySpeed;
     public int turnSpeed = 1;
     public int lives = 3;
     public float wasHitForce = 5000;
     public float enemyHitSpeed = 4;
+    private bool OnHit =false;
     // Use this for initialization
     void Awake()
     {
@@ -41,7 +42,9 @@ public class Enemy : MonoBehaviour
         }
         if (otherObject.gameObject.tag == "Sword" && lives > 0 && st == state.normal)
         {
+
             lives--;
+            StartCoroutine(hit());
             enemySpeed = enemyHitSpeed;
             if (!playerLeft(otherObject))
             {
@@ -69,6 +72,12 @@ public class Enemy : MonoBehaviour
         {
             enemySpeed -= 0.1f;
         }
+    }
+    IEnumerator hit()
+    {
+        OnHit = true;
+        yield return new WaitForSeconds(50/((enemyHitSpeed-enemySpeedstart)/0.1f));
+        OnHit = false;
     }
     IEnumerator invincible()
     {
