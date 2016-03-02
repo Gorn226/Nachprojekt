@@ -1,31 +1,43 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour
+{
 
-    private int [] weaponInventory;
-    private int [] shieldInventory;
-    private int [] potInventory;
-    private Item [] itemInventory;
+    public GameObject Slot1;
+    public GameObject Slot2;
+    public GameObject Slot3;
+    public GameObject Slot4;
 
+    private List<Item> weaponInventory;
+    private List<Item> shieldInventory;
+    private List<Item> potInventory;
+    private List<Item> itemInventory;
+
+    private int currentWeapon = 0;
+    private int currentShield = 0;
+    private int currentPot = 0;
     private int currentItem = 0;
-
-    // Use this for initialization
-    void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Item") {
-            itemInventory[currentItem] = col.GetComponent<Item>();
-            currentItem++;
-            Destroy (col);
-        }
+        if (col.tag == "Item")
+            switch (col.GetComponent<Item>().type)
+            {
+                case Item.itemType.Weapon:
+                    weaponInventory.Add(col.GetComponent<Item>());
+                    break;
+                case Item.itemType.Shield:
+                    shieldInventory.Add(col.GetComponent<Item>());
+                    break;
+                case Item.itemType.Pot:
+                    Slot4.transform.GetChild(0).GetComponent<Image>().sprite = col.GetComponent<Item>().itemIcon;
+                    //potInventory.Add(col.gameObject.GetComponent<Item>());
+                    potInventory.Add(col.gameObject.GetComponent<Item>());
+                    break;
+            }
+        Destroy(col.gameObject);
     }
 }

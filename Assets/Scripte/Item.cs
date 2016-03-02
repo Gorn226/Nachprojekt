@@ -3,23 +3,31 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 
-    public enum potType
+    public enum itemType
     {
-        Small,
-        Medium,
-        Big,
+        Weapon,
+        Shield,
+        Pot,
     }
-    public potType type;
-    public Sprite pot;
-    private int hpRecovery;
 
-    void Start()
+    public int itemID;
+    public itemType type;
+    public Sprite itemIcon;
+    [SerializeField]
+    private int value;
+    [SerializeField]
+    private bool stackable;
+
+    //public Item(itemType type, Sprite icon, int val, bool stack)
+    //{
+    //    this.type = type;
+    //    itemIcon = icon;
+    //    value = val;
+    //    stackable = stack;
+    //}
+
+    public Item()
     {
-        if (type == potType.Small)
-            hpRecovery = 10;
-        if (type == potType.Medium)
-            hpRecovery = 20;
-        if (type == potType.Big)
-            hpRecovery = 30;
+
     }
 }
