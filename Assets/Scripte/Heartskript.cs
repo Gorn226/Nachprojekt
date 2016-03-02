@@ -13,7 +13,6 @@ public class Heartskript : MonoBehaviour {
     }
     public void setHearts(int health)
     {
-        Debug.Log("Hallo");
         for (int i = hearts.Length - 1; i >= health; i--)
         {
             hearts[i].SetActive(false);

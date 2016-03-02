@@ -1,32 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
 
-    enum state {normal, invincible}
+    enum state { normal, invincible }
     private state st = state.normal;
-    public float enemySpeedstart=1; 
+    public float enemySpeedstart = 1;
     private float enemySpeed;
     public int turnSpeed = 1;
     public int lives = 3;
     public float wasHitForce = 5000;
-    public float enemyHitSpeed =4;
-	// Use this for initialization
+    public float enemyHitSpeed = 4;
+    // Use this for initialization
     void Awake()
     {
         enemySpeed = enemySpeedstart;
     }
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         float amToMove = enemySpeed * Time.deltaTime * turnSpeed;
         transform.Translate(Vector3.right * amToMove);
 
-       
-	}
+
+    }
 
     void OnTriggerEnter2D(Collider2D otherObject)
     {
@@ -36,15 +39,29 @@ public class Enemy : MonoBehaviour {
             StartCoroutine(turn());
             enemySpeed *= -1;
         }
-        if (otherObject.gameObject.tag == "Sword" && lives > 0&&st ==state.normal)
+        if (otherObject.gameObject.tag == "Sword" && lives > 0 && st == state.normal)
         {
             lives--;
             enemySpeed = enemyHitSpeed;
+            if (!playerLeft(otherObject))
+            {
+                enemySpeed *= -1;
+            }
             StartCoroutine(invincible());
-            
+
         }
         else if (lives == 0)
             Destroy(gameObject);
+    }
+
+    private bool playerLeft(Collider2D ob)
+    {
+        float div = transform.position.x - ob.transform.position.x;
+        if (div < 0)
+        {
+            return false;
+        }
+        return true;
     }
     void FixedUpdate()
     {
