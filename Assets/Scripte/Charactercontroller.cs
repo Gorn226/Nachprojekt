@@ -30,6 +30,8 @@ public class Charactercontroller : MonoBehaviour
     Rigidbody2D rb2d;
     public float height;
     public float gravityPlus =0f;
+
+    public float wasHitForce=5000;
     // Use this for initialization
     void Awake()
     {
@@ -100,10 +102,8 @@ public class Charactercontroller : MonoBehaviour
         yield return new WaitForSeconds(invinTime);
         st = state.normal;
     }
-    void OnTriggerEnter2D(Collider2D col)
-    { 
-        
-        
+    void OnCollisionEnter2D(Collision2D col) 
+    {
         if (col.gameObject.tag == "Enemy"&& st ==state.normal)
         {
             Enemy enemy = (Enemy)col.gameObject.GetComponent("Enemy");
@@ -111,8 +111,22 @@ public class Charactercontroller : MonoBehaviour
             if (!hitShield(enemy))
             {
                 health--;
+                hitAway(enemy);
                 StartCoroutine(invincible());
+                
             }
+        }
+    }
+    void hitAway(Enemy enemy)
+    {
+        float div =  enemy.transform.position.x-transform.position.x;
+        if (div < 0)
+        {
+            rb2d.AddForce(Vector2.right * 1 * wasHitForce);
+        }
+        else
+        {
+            rb2d.AddForce(Vector2.right * (-1) * wasHitForce);
         }
     }
     bool hitShield(Enemy enemy) // or Sword
