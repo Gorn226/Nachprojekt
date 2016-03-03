@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.right * amToMove);
         animator.SetBool("OnHit", OnHit);
         //LoseLife();
-        speedLastFrame= rb2d.
+       // speedLastFrame= rb2d.
 
     }
 
