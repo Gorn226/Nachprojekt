@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     Animator animator;
     private float speedLastFrame;
     Rigidbody2D rb2d;
+    private bool faceRight;
 
     // Use this for initialization
     void Awake()
