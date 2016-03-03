@@ -68,6 +68,8 @@ public class Charactercontroller : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
+            Vector2 v = new Vector2(rb2d.velocity.x, 0);
+            rb2d.velocity = v;
             jump = true;
 
         }
