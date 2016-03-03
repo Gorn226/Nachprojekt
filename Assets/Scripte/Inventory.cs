@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        //DontDestroyOnLoad()
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Player"));
         if (shieldInventory.Count < 1)
             gameObject.GetComponent<Charactercontroller>().hasShield = false;
         if (weaponInventory.Count < 1)
@@ -80,28 +80,24 @@ public class Inventory : MonoBehaviour
             switch (currentPosition)
             {
                 case 0:
-                    Debug.Log("schwert");
                     if (Input.GetAxisRaw("MenuVertical") < 0 && currentWeapon > 0)
                         currentWeapon--;
                     else if (Input.GetAxisRaw("MenuVertical") > 0 && currentWeapon < weaponInventory.Count - 1)
                         currentWeapon++;
                     break;
                 case 1:
-                    Debug.Log("Schild");
                     if (Input.GetAxisRaw("MenuVertical") < 0 && currentShield > 0)
                         currentShield--;
                     else if (Input.GetAxisRaw("MenuVertical") > 0 && currentShield < shieldInventory.Count - 1)
                         currentShield++;
                     break;
                 case 2:
-                    Debug.Log("pot");
                     if (Input.GetAxisRaw("MenuVertical") < 0 && currentPot > 0)
                         currentPot--;
                     else if (Input.GetAxisRaw("MenuVertical") > 0 && currentPot < potInventory.Count - 1)
                         currentPot++;
                     break;
                 case 3:
-                    Debug.Log("inv");
                     break;
             }
         }
