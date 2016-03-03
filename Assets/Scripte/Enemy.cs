@@ -14,7 +14,8 @@ public class Enemy : MonoBehaviour
     public float enemyHitSpeed = 4;
     private bool OnHit = false;
     Animator animator;
-
+    private float speedLastFrame;
+    Rigidbody2D rb2d;
     // Use this for initialization
     void Awake()
     {
@@ -33,6 +34,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.right * amToMove);
         animator.SetBool("OnHit", OnHit);
         //LoseLife();
+        speedLastFrame= rb2d.
 
     }
 
@@ -50,20 +52,24 @@ public class Enemy : MonoBehaviour
         {
 
             lives--;
-            StartCoroutine(hit());
-            enemySpeed = enemyHitSpeed;
-            if (!playerLeft(otherObject))
+            if (lives == 0)
             {
-                enemySpeed *= -1;
+                turnSpeed = 0;
+                transform.GetComponent<PolygonCollider2D>().enabled = false;
+                //StartCoroutine(timeTillDeath());
+                //Destroy(gameObject);
             }
-            StartCoroutine(invincible());
+            else
+            {
+                StartCoroutine(hit());
+                enemySpeed = enemyHitSpeed;
+                if (!playerLeft(otherObject))
+                {
+                    enemySpeed *= -1;
+                }
+                StartCoroutine(invincible());
 
-        }
-        else if (lives == 0) {
-            turnSpeed = 0;
-            transform.GetComponent<BoxCollider2D>().enabled = false;
-            //StartCoroutine(timeTillDeath());
-            //Destroy(gameObject);
+            }
         }
     }
 

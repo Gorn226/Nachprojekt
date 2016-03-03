@@ -60,7 +60,7 @@ public class Charactercontroller : MonoBehaviour
     void Update()
     {
 
-        knightSpeed = rb2d.velocity.x;
+        knightSpeed = Mathf.Abs(rb2d.velocity.x);
         animator.SetFloat("knightSpeed", knightSpeed);
         grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
        // Debug.Log("Danach: " + grounded);
