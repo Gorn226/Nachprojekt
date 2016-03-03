@@ -14,7 +14,6 @@ public class Item : MonoBehaviour {
     public itemType type;
     public Sprite itemIcon;
     public int stacks;
-    [SerializeField]
-    private int value;
+    public int value;
     
 }
