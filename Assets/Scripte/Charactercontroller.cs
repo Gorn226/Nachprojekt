@@ -59,7 +59,6 @@ public class Charactercontroller : MonoBehaviour
     void Update()
     {
 
-
         grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
         animator.SetBool("grounded", grounded);
 
