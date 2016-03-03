@@ -6,7 +6,7 @@ public class Charactercontroller : MonoBehaviour
 {
     enum state { normal, invincible};
 
-    public GameObject camera;
+    private GameObject camera;
     state st = state.normal;
     [HideInInspector]
     public bool facingRight = true;
@@ -19,7 +19,8 @@ public class Charactercontroller : MonoBehaviour
     public int health = 3;
     public float invinTime =0.5f; // Zeit wie Lange man unverwuntbar ist
     public bool armed = false;
-    public bool hasShield = true;
+    public bool hasShield = false;
+    public bool hasSword = true;
     public GameObject shield;
     bool shieldpresst = false;
     public GameObject sword;
@@ -40,6 +41,7 @@ public class Charactercontroller : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
 
@@ -98,7 +100,7 @@ public class Charactercontroller : MonoBehaviour
             shieldpresst = false;
             shield.SetActive(false);
         }
-        if (Input.GetButtonDown("Sword") && shieldpresst == false && hitting == false)
+        if (Input.GetButtonDown("Sword") && shieldpresst == false && hitting == false&& hasSword)
         {
 
             StartCoroutine(swordBlow());

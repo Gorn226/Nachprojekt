@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     Animator animator;
     private float speedLastFrame;
     Rigidbody2D rb2d;
+    private bool faceRight;
 
     // Use this for initialization
     void Awake()
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("turnSpeed", turnSpeed);
         transform.Translate(Vector3.right * amToMove);
         animator.SetBool("OnHit", OnHit);
+        animator.SetInteger("lives", lives);
         //LoseLife();
        // speedLastFrame= rb2d.
 
