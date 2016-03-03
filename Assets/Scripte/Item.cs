@@ -13,21 +13,8 @@ public class Item : MonoBehaviour {
     public int itemID;
     public itemType type;
     public Sprite itemIcon;
+    public int stacks;
     [SerializeField]
     private int value;
-    [SerializeField]
-    private bool stackable;
-
-    //public Item(itemType type, Sprite icon, int val, bool stack)
-    //{
-    //    this.type = type;
-    //    itemIcon = icon;
-    //    value = val;
-    //    stackable = stack;
-    //}
-
-    public Item()
-    {
-
-    }
+    
 }
