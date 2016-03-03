@@ -7,11 +7,11 @@ public class cameraFollow : MonoBehaviour {
     void LateUpdate()
     {
         float PlayerX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        Vector3 whereToGo = new Vector3(PlayerX, 1.5f, -10f);
+        Vector3 whereToGo = new Vector3(PlayerX, 0.8f, -10f);
         transform.position = Vector3.Lerp(transform.position, whereToGo, Time.deltaTime * 8);
 
 
         if (transform.position.x <linkeGrenze)
-            transform.position = new Vector3(linkeGrenze, 1.5f, -10);
+            transform.position = new Vector3(linkeGrenze, 0.8f, -10);
     }
 }
