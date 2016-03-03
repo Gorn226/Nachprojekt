@@ -32,6 +32,9 @@ public class Inventory : MonoBehaviour
                     break;
                 case Item.itemType.Shield:
                     shieldInventory.Add(col.GetComponent<Item>());
+                    gameObject.GetComponent<Charactercontroller>().hasShield = true;
+                    if (shieldInventory.Count == 1)
+                        gameObject.GetComponent<Charactercontroller>().hasShield = true;
                     break;
                 case Item.itemType.Pot:
                     
@@ -43,19 +46,6 @@ public class Inventory : MonoBehaviour
                     {
                         potInventory.Add(col.GetComponent<Item>());
                     }
-
-                    //var match = potInventory.FirstOrDefault(pot => pot.itemID == col.GetComponent<Item>().itemID);
-                    //if (match == null)
-                    //{
-                    //    Debug.Log("neu");
-                    //    potInventory.Add(col.GetComponent<Item>());
-                    //}
-                    //else
-                    //{
-                    //    match.stacks++;
-                    //    Debug.Log("vorhanden");
-                    //}
-
                     break;
             }
         DrawSlots();
@@ -64,6 +54,8 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        if (shieldInventory.Count < 1)
+            gameObject.GetComponent<Charactercontroller>().hasShield = false;
         slotBasic = Resources.Load<Sprite>("3_item_select_slot1");
         slotSelected = Resources.Load<Sprite>("3_item_select_slot2");
         DrawSlots();
