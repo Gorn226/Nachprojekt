@@ -35,6 +35,8 @@ public class Charactercontroller : MonoBehaviour
 
     Animator animator;
 
+    public bool death = false;
+
     // Use this for initialization
     void Awake()
     {
@@ -50,12 +52,19 @@ public class Charactercontroller : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("hitting", hitting);
         animator.SetBool("grounded", grounded);
+        animator.SetBool("death", death);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+
         grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
+        animator.SetBool("grounded", grounded);
+
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
@@ -92,7 +101,10 @@ public class Charactercontroller : MonoBehaviour
         }
         if (health <= 0)
         {
-            Application.LoadLevel("Endscreen");
+            death = true;
+            animator.SetBool("death", death);
+            StartCoroutine(deathdelay());
+            
         }
         
     }
@@ -105,6 +117,7 @@ public class Charactercontroller : MonoBehaviour
         sword.SetActive(false);
         hitting = false;
         armed = false;
+        animator.SetBool("hitting", hitting);
     }
     IEnumerator invincible()
     {
@@ -112,6 +125,13 @@ public class Charactercontroller : MonoBehaviour
         yield return new WaitForSeconds(invinTime);
         st = state.normal;
     }
+
+    IEnumerator deathdelay()
+    {
+        yield return new WaitForSeconds(2f);
+        Application.LoadLevel("Endscreen");
+    }
+
     void OnCollisionEnter2D(Collision2D col) 
     {
         if (col.gameObject.tag == "Enemy"&& st ==state.normal)
