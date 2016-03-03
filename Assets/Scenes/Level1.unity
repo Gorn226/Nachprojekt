@@ -872,6 +872,7 @@ GameObject:
   - 81: {fileID: 942123244}
   - 114: {fileID: 942123243}
   - 114: {fileID: 942123242}
+  - 114: {fileID: 942123249}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -909,11 +910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8238cc53530b64fbb7828c3d3bb591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 643122381}
-  damping: 1
-  lookAheadFactor: 3
-  lookAheadReturnSpeed: 0.5
-  lookAheadMoveThreshold: 0.1
 --- !u!81 &942123244
 AudioListener:
   m_ObjectHideFlags: 0
@@ -990,6 +986,18 @@ Transform:
   - {fileID: 1363088883}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &942123249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 942123241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a764f61868d50246b0265224d900d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkeGrenze: 1.5
 --- !u!1 &1000500555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,7 +1387,6 @@ MonoBehaviour:
   lives: 3
   wasHitForce: 0
   enemyHitSpeed: 4
-  speedLastFrame: 0
 --- !u!212 &1443998875
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("turnSpeed", turnSpeed);
         transform.Translate(Vector3.right * amToMove);
         animator.SetBool("OnHit", OnHit);
+        animator.SetInteger("lives", lives);
         //LoseLife();
        // speedLastFrame= rb2d.
 
