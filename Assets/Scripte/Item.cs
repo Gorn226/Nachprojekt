@@ -8,6 +8,7 @@ public class Item : MonoBehaviour {
         Weapon,
         Shield,
         Pot,
+        Special,
     }
 
     public int itemID;

@@ -5,24 +5,29 @@ using System.Linq;
 
 public class Inventory : MonoBehaviour
 {
+    //Array für die Slots
     public GameObject[] Slots = new GameObject[4];
 
+    //4 verschiedene Inventare für je ein Itemtyp
     private List<Item> weaponInventory = new List<Item>();
     private List<Item> shieldInventory = new List<Item>();
     private List<Item> potInventory = new List<Item>();
     private List<Item> itemInventory = new List<Item>();
 
+    //aktuelle position des jeweiligen inventars/slots
     private int currentWeapon = 0;
     private int currentShield = 0;
     private int currentPot = 0;
     private int currentItem = 0;
     private int currentPosition = 0;
 
+    //Inventarslots
     private Sprite slotBasic;
     private Sprite slotSelected;
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        //prüft ob ein Item aufgesammelt werden kann, pots können stacken
         if (col.tag == "Item")
             switch (col.GetComponent<Item>().type)
             {
@@ -35,7 +40,7 @@ public class Inventory : MonoBehaviour
                     gameObject.GetComponent<Charactercontroller>().hasShield = true;
                     break;
                 case Item.itemType.Pot:
-                    foreach (var pot in potInventory.TakeWhile(pot => pot.itemID == col.GetComponent<Item>().itemID))
+                    foreach (var pot in potInventory.Where(pot => pot.itemID == col.GetComponent<Item>().itemID))
                     {
                         pot.stacks++;
                     }
@@ -44,18 +49,27 @@ public class Inventory : MonoBehaviour
                         potInventory.Add(col.GetComponent<Item>());
                     }
                     break;
+                case Item.itemType.Special:
+                    itemInventory.Add(col.GetComponent<Item>());
+                    break;
             }
+        //Zeichne das Inventar neu sobald ein Item aufgesammelt wurde, und zerstöre das Item
         DrawSlots();
         Destroy(col.gameObject);
     }
 
     void Start()
     {
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Player"));
+        //TODO Inventar in die nächste szene übernehmen
+        //DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Player"));
+
+        //testet ob der spieler ein schild bzw. schwert besitzt
         if (shieldInventory.Count < 1)
             gameObject.GetComponent<Charactercontroller>().hasShield = false;
         if (weaponInventory.Count < 1)
             gameObject.GetComponent<Charactercontroller>().hasSword = false;
+
+        //zeichnet das Inventar
         slotBasic = Resources.Load<Sprite>("3_item_select_slot1");
         slotSelected = Resources.Load<Sprite>("3_item_select_slot2");
         DrawSlots();
@@ -63,6 +77,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
+        //ruft die Benutzereingabe auf
         InventoryControl();
         UseItem();
     }
@@ -71,16 +86,37 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetButtonDown("Pot"))
         {
-            if (potInventory[currentPot].stacks > 1)
+            //falls man keinen pot besitzt so passiert nichts
+            if (potInventory.Count == 0 || gameObject.GetComponent<Charactercontroller>().health > 5) return;
+            //wenn der aktuelle pot mehr als einen stack hat, so wird dieser nur um 1 verringert
+            else if (potInventory[currentPot].stacks > 1)
                 potInventory[currentPot].stacks--;
+            //wenn er nur einen stack hat,
             else
             {
-                potInventory.Remove(potInventory[currentPot]);
-                if (currentPot == potInventory.Count && potInventory.Count > 1)
+                //und der oberste pot ist, es aber noch pots unter ihm gibt
+                //so wird der pot unter ihm ausgewählt und der darüber gelöscht
+                if (currentPot == potInventory.Count - 1 && potInventory.Count > 1)
+                {
                     currentPot -= 1;
+                    potInventory.Remove(potInventory[currentPot + 1]);
+                }
+                //es ein pot ist bei dem noch nachruchtschen kann, 
+                //oder der letzte pot ist dann wird er gelöscht
+                else
+                {
+                    potInventory.Remove(potInventory[currentPot]);
+                }
             }
+            if (gameObject.GetComponent<Charactercontroller>().health > 3)
+                gameObject.GetComponent<Charactercontroller>().health = 6;
+            else
+            {
+                gameObject.GetComponent<Charactercontroller>().health += 2;
+            }
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Heartskript>().setHearts(gameObject.GetComponent<Charactercontroller>().health);
+            DrawSlots();
         }
-        DrawSlots();
     }
 
     private void InventoryControl()
@@ -126,20 +162,36 @@ public class Inventory : MonoBehaviour
     {
         Slots[0].transform.GetComponent<Image>().sprite = slotBasic;
         if (weaponInventory.Count != 0)
+        {
+            Slots[0].transform.GetChild(0).GetComponent<Image>().enabled = true;
             Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = weaponInventory[currentWeapon].itemIcon;
+        }
         else
-            Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = slotBasic;
+            Slots[0].transform.GetChild(0).GetComponent<Image>().enabled = false;
         Slots[1].transform.GetComponent<Image>().sprite = slotBasic;
         if (shieldInventory.Count != 0)
+        {
+            Slots[1].transform.GetChild(0).GetComponent<Image>().enabled = true;
             Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = shieldInventory[currentShield].itemIcon;
+        }
         else
-            Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = slotBasic;
+            Slots[1].transform.GetChild(0).GetComponent<Image>().enabled = false;
         Slots[2].transform.GetComponent<Image>().sprite = slotBasic;
         if (potInventory.Count != 0)
+        {
+            Slots[2].transform.GetChild(0).GetComponent<Image>().enabled = true;
             Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = potInventory[currentPot].itemIcon;
+        }
         else
-            Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = slotBasic;
+            Slots[2].transform.GetChild(0).GetComponent<Image>().enabled = false;
         Slots[3].transform.GetComponent<Image>().sprite = slotBasic;
+        if (itemInventory.Count != 0)
+        {
+            Slots[3].transform.GetChild(0).GetComponent<Image>().enabled = true;
+            Slots[3].transform.GetChild(0).GetComponent<Image>().sprite = itemInventory[currentItem].itemIcon;
+        }
+        else
+            Slots[3].transform.GetChild(0).GetComponent<Image>().enabled = false;
         Slots[currentPosition].transform.GetComponent<Image>().sprite = slotSelected;
     }
 }

@@ -15,6 +15,7 @@ public class Heartskript : MonoBehaviour {
     }
     public void setHearts(int health)
     {
+        Debug.Log(health);
         int fullhearts = health/2;
         int halfhearts;
         if (health%2==1)
