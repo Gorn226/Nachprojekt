@@ -99,13 +99,13 @@ public class Enemy : MonoBehaviour
         Debug.Log("enemySpeed "+enemySpeed);
         if (faceRight && Mathf.Abs(enemySpeed) > enemySpeedstart)
         {
-            enemySpeed -= 0.1f;
+            enemySpeed += 0.1f;
         }
         else 
         {
             if (!faceRight && Mathf.Abs(enemySpeed) > enemySpeedstart)
             {
-                enemySpeed += 0.1f;
+                enemySpeed -= 0.1f;
             }
         }
     }
