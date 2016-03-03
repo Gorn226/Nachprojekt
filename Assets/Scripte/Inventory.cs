@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
     private int currentShield = 0;
     private int currentPot = 0;
     private int currentItem = 0;
-    private int currentPosition = 3;
+    private int currentPosition = 0;
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -26,11 +26,9 @@ public class Inventory : MonoBehaviour
             {
                 case Item.itemType.Weapon:
                     weaponInventory.Add(col.GetComponent<Item>());
-                    Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = weaponInventory[currentWeapon].itemIcon;
                     break;
                 case Item.itemType.Shield:
                     shieldInventory.Add(col.GetComponent<Item>());
-                    Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = shieldInventory[currentShield].itemIcon;
                     break;
                 case Item.itemType.Pot:
                     
@@ -55,35 +53,74 @@ public class Inventory : MonoBehaviour
                     //    Debug.Log("vorhanden");
                     //}
 
-                    Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = potInventory[currentPot].itemIcon;
                     break;
             }
+        DrawSlots();
         Destroy(col.gameObject);
+    }
+
+    void Start()
+    {
+        DrawSlots();
     }
 
     void Update()
     {
         UserInput();
-        Debug.Log(currentPosition);
     }
 
     private void UserInput()
     {
+        if (Input.GetButtonDown("Sword"))
+            Debug.Log(potInventory[currentPot].stacks);
+
         if (!Input.GetButtonDown("MenuHorizontal")) return;
         { 
         if (Input.GetAxisRaw("MenuHorizontal") < 0 && currentPosition > 0)
             currentPosition--;
-        else if (Input.GetAxisRaw("MenuHorizontal") > 0 && currentPosition < 3)
+        else if (Input.GetAxisRaw("MenuHorizontal") > 0 && currentPosition < Slots.Length -1)
             currentPosition++;
-            DrawSelectedSlot();
+            DrawSlots();
         }
+
+        if (!Input.GetButtonDown("MenuVertical")) return;
+        switch(currentPosition)
+        {
+            case 0:
+                if (Input.GetAxisRaw("MenuVertical") < 0 && currentWeapon > 0)
+                    currentWeapon--;
+                else if (Input.GetAxisRaw("MenuVertical") > 0 && currentWeapon < weaponInventory.Count)
+                    currentWeapon++;
+                break;
+            case 1:
+                if (Input.GetAxisRaw("MenuVertical") < 0 && currentShield > 0)
+                    currentShield--;
+                else if (Input.GetAxisRaw("MenuVertical") > 0 && currentShield < shieldInventory.Count)
+                    currentShield++;
+                break;
+            case 2:
+                if (Input.GetAxisRaw("MenuVertical") < 0 && currentPot > 0)
+                    currentPot--;
+                else if (Input.GetAxisRaw("MenuVertical") > 0 && currentPot < potInventory.Count)
+                    currentPot++;
+                break;
+            case 3:
+                break;
+        }
+        DrawSlots();
     }
 
-    private void DrawSelectedSlot()
+    private void DrawSlots()
     {
         Slots[0].transform.GetComponent<Image>().color = Color.white;
+        if (weaponInventory.Count != 0)
+            Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = weaponInventory[currentWeapon].itemIcon;
         Slots[1].transform.GetComponent<Image>().color = Color.white;
+        if (shieldInventory.Count != 0)
+            Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = shieldInventory[currentShield].itemIcon;
         Slots[2].transform.GetComponent<Image>().color = Color.white;
+        if (potInventory.Count != 0)
+            Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = potInventory[currentPot].itemIcon;
         Slots[3].transform.GetComponent<Image>().color = Color.white;
         Slots[currentPosition].transform.GetComponent<Image>().color = Color.red;
     }
