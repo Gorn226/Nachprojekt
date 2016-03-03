@@ -32,6 +32,7 @@ public class Inventory : MonoBehaviour
                     break;
                 case Item.itemType.Shield:
                     shieldInventory.Add(col.GetComponent<Item>());
+                    gameObject.GetComponent<Charactercontroller>().hasShield = true;
                     break;
                 case Item.itemType.Pot:
                     foreach (var pot in potInventory.TakeWhile(pot => pot.itemID == col.GetComponent<Item>().itemID))

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Charactercontroller : MonoBehaviour
 {
     enum state { normal, invincible};
 
-    private GameObject camera;
+    private GameObject cam;
     state st = state.normal;
     [HideInInspector]
     public bool facingRight = true;
@@ -41,7 +42,7 @@ public class Charactercontroller : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
 
@@ -78,11 +79,11 @@ public class Charactercontroller : MonoBehaviour
         }
         if (Input.GetButtonDown("OP1") && Input.GetButtonDown("OP2"))
         {
-            Application.LoadLevel("Sieg");
+            SceneManager.LoadScene("Sieg");
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.LoadLevel("Menü");
+            SceneManager.LoadScene("Menü");
         }
         if (grounded)
         {
@@ -145,7 +146,7 @@ public class Charactercontroller : MonoBehaviour
     IEnumerator deathdelay()
     {
         yield return new WaitForSeconds(1f);
-        Application.LoadLevel("Endscreen");
+        SceneManager.LoadScene("Endscreen");
     }
 
     void OnCollisionEnter2D(Collision2D col) 
@@ -157,7 +158,7 @@ public class Charactercontroller : MonoBehaviour
             if (!hitShield(enemy))
             {
                 health--;
-                camera.gameObject.GetComponent<Heartskript>().setHearts(health);
+                cam.gameObject.GetComponent<Heartskript>().setHearts(health);
                 hitAway(enemy);
                 StartCoroutine(invincible());
                 

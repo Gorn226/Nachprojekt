@@ -9,7 +9,7 @@ public class Sieg : MonoBehaviour {
         if (col.transform.tag== "Player")
         {
 
-            Application.LoadLevel("Sieg");
+            SceneManager.LoadScene("Sieg");
         }
     }
 }

@@ -5,7 +5,7 @@ public class ButtonScripte : MonoBehaviour {
 
     public void starten(string name)
     {
-        Application.LoadLevel(name);
+        SceneManager.LoadScene(name);
     }
     public void verlassen()
     {
