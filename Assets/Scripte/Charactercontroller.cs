@@ -6,7 +6,7 @@ public class Charactercontroller : MonoBehaviour
 {
     enum state { normal, invincible};
 
-    public GameObject camera;
+    private GameObject camera;
     state st = state.normal;
     [HideInInspector]
     public bool facingRight = true;
@@ -24,8 +24,11 @@ public class Charactercontroller : MonoBehaviour
     bool shieldpresst = false;
     public GameObject sword;
     bool hitting = false;
+    public Collider2D col2D;
 
     private bool grounded = false;
+    private bool grounded1 = false;
+    private bool grounded2 = false;
     Rigidbody2D rb2d;
     public float height;
     public float gravityPlus =0f;
@@ -39,6 +42,8 @@ public class Charactercontroller : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        col2D = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
 
@@ -62,8 +67,15 @@ public class Charactercontroller : MonoBehaviour
 
         knightSpeed = Mathf.Abs(rb2d.velocity.x);
         animator.SetFloat("knightSpeed", knightSpeed);
-        grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
-       // Debug.Log("Danach: " + grounded);
+        Vector3 vec1 = col2D.transform.position;
+        vec1.x += transform.localScale.x*0.49f;
+        Vector3 vec2 = col2D.transform.position;
+        vec2.x -= transform.localScale.x * 0.49f;
+
+        grounded1 = Physics2D.Linecast(vec1, col2D.transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
+        grounded2 = Physics2D.Linecast(vec2, col2D.transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
+        grounded = grounded1 || grounded2;
+        // Debug.Log("Danach: " + grounded);
         animator.SetBool("grounded", grounded);
 
         if (Input.GetButtonDown("Jump") && grounded)
