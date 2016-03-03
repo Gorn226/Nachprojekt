@@ -25,8 +25,8 @@ InputManager:
     m_Name: MenuHorizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 4
-    positiveButton: 6
+    negativeButton: '[4]'
+    positiveButton: '[6]'
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -57,8 +57,8 @@ InputManager:
     m_Name: MenuVertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 2
-    positiveButton: 8
+    negativeButton: '[2]'
+    positiveButton: '[8]'
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
