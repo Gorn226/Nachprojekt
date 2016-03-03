@@ -100,12 +100,12 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (lives != 0 && ((actualSpeed > 0 && actualSpeed > enemySpeed) || (actualSpeed < 0 && actualSpeed > enemySpeed)))
+        if (lives >0 && ((actualSpeed > 0 && actualSpeed > enemySpeed) || (actualSpeed < 0 && actualSpeed > enemySpeed)))
         {
             enemySpeed += 0.1f;
         }
 
-        if (lives != 0 && ((actualSpeed > 0 && actualSpeed < enemySpeed) || (actualSpeed < 0 && actualSpeed < enemySpeed)))
+        if (lives > 0 && ((actualSpeed > 0 && actualSpeed < enemySpeed) || (actualSpeed < 0 && actualSpeed < enemySpeed)))
         {
             enemySpeed -= 0.1f;
         }
