@@ -24,6 +24,7 @@ public class Charactercontroller : MonoBehaviour
     bool shieldpresst = false;
     public GameObject sword;
     bool hitting = false;
+   
 
     private bool grounded = false;
     Rigidbody2D rb2d;
@@ -101,6 +102,7 @@ public class Charactercontroller : MonoBehaviour
         {
 
             StartCoroutine(swordBlow());
+            
         }
         if (health <= 0)
         {
@@ -120,13 +122,16 @@ public class Charactercontroller : MonoBehaviour
         armed = true;
         sword.SetActive(true);
         hitting = true;
-        animator.SetBool("hitting", hitting);
-
-        yield return new WaitForSeconds(1.5f);
+        Animator anim = transform.GetChild(0).GetComponent<Animator>();
+        transform.GetComponent<SpriteRenderer>().enabled = false;
+        anim.SetBool("hitting", hitting);      
+        yield return new WaitForSeconds(0.5f);
         sword.SetActive(false);
         hitting = false;
         armed = false;
-        animator.SetBool("hitting", hitting);
+        anim.SetBool("hitting", hitting);
+        yield return new WaitForSeconds(0.25f);
+        transform.GetComponent<SpriteRenderer>().enabled = true;
     }
     IEnumerator invincible()
     {
