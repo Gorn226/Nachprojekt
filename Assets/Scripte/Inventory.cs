@@ -29,12 +29,11 @@ public class Inventory : MonoBehaviour
             {
                 case Item.itemType.Weapon:
                     weaponInventory.Add(col.GetComponent<Item>());
+                    gameObject.GetComponent<CharacterController>().hasSword = true;
                     break;
                 case Item.itemType.Shield:
                     shieldInventory.Add(col.GetComponent<Item>());
                     gameObject.GetComponent<Charactercontroller>().hasShield = true;
-                    if (shieldInventory.Count == 1)
-                        gameObject.GetComponent<Charactercontroller>().hasShield = true;
                     break;
                 case Item.itemType.Pot:
                     
@@ -56,6 +55,8 @@ public class Inventory : MonoBehaviour
     {
         if (shieldInventory.Count < 1)
             gameObject.GetComponent<Charactercontroller>().hasShield = false;
+        if (weaponInventory.Count < 1)
+            gameObject.GetComponent<CharacterController>().hasSword = false;
         slotBasic = Resources.Load<Sprite>("3_item_select_slot1");
         slotSelected = Resources.Load<Sprite>("3_item_select_slot2");
         DrawSlots();
