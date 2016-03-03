@@ -1148,10 +1148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beadb9cadea2102468949af482245be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Slot1: {fileID: 1391688206}
-  Slot2: {fileID: 1746609083}
-  Slot3: {fileID: 265264458}
-  Slot4: {fileID: 1899917332}
+  Slots:
+  - {fileID: 1391688206}
+  - {fileID: 1746609083}
+  - {fileID: 265264458}
+  - {fileID: 1899917332}
 --- !u!1 &801040445
 GameObject:
   m_ObjectHideFlags: 0
