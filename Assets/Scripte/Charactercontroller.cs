@@ -22,7 +22,6 @@ public class Charactercontroller : MonoBehaviour
     public bool hasShield = true;
     public GameObject shield;
     bool shieldpresst = false;
-
     public GameObject sword;
     bool hitting = false;
 
@@ -59,7 +58,6 @@ public class Charactercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
 
 
         grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
@@ -101,12 +99,16 @@ public class Charactercontroller : MonoBehaviour
         }
         if (health <= 0)
         {
-            death = true;
-            animator.SetBool("death", death);
-            StartCoroutine(deathdelay());
+            andStayDead();
             
         }
         
+    }
+    public  void andStayDead()
+    {
+        death = true;
+        animator.SetBool("death", death);
+        StartCoroutine(deathdelay());
     }
     IEnumerator swordBlow()
     {
