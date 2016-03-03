@@ -1371,10 +1371,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeedstart: 2
   enemySpeed: 0
+  actualSpeed: 0
   turnSpeed: 1
   lives: 3
   wasHitForce: 0
   enemyHitSpeed: 3
+  rb2d: {fileID: 1443998877}
 --- !u!212 &1443998875
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1429,11 +1431,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.5
   m_GravityScale: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &1443998878
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1448,17 +1450,16 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.053001236, y: 0.20692027}
-      - {x: -0.0039296597, y: 0.23724687}
-      - {x: -0.14999999, y: 0.14999999}
+    - - {x: 0.06367457, y: 0.1668953}
+      - {x: -0.025276337, y: 0.1998903}
+      - {x: -0.12064836, y: 0.093965046}
       - {x: -0.14999999, y: -0.06}
       - {x: -0.12, y: -0.19999999}
       - {x: -0.08, y: -0.26}
       - {x: -0.049999997, y: -0.29}
       - {x: 0.07, y: -0.29}
       - {x: 0.14999999, y: -0.11}
-      - {x: 0.15448436, y: 0.14666276}
-      - {x: 0.14209303, y: 0.15382789}
+      - {x: 0.119796015, y: 0.061276138}
 --- !u!95 &1443998879
 Animator:
   serializedVersion: 3

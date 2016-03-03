@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     private bool OnHit = false;
     Animator animator;
     private float speedLastFrame;
-    Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
     private bool faceRight = true;
 
     // Use this for initialization
@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     {
         enemySpeed = enemySpeedstart;
         actualSpeed = enemySpeedstart;
+        rb2d = GetComponent<Rigidbody2D>();
     }
     void Start()
     {
@@ -61,6 +62,7 @@ public class Enemy : MonoBehaviour
             {
                 turnSpeed = 0;
                 transform.GetComponent<PolygonCollider2D>().enabled = false;
+                rb2d.isKinematic = true;
                 //StartCoroutine(timeTillDeath());
                 //Destroy(gameObject);
             }
@@ -68,6 +70,7 @@ public class Enemy : MonoBehaviour
             {
                 StartCoroutine(hit());
                 enemySpeed = enemyHitSpeed;
+                rb2d.AddForce(new Vector2(0f, 80f));
                 if (!playerLeft(otherObject))
                 {
                     enemySpeed *= -1;
