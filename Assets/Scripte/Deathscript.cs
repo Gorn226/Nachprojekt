@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Deathscript : MonoBehaviour {
+public class Deathscript : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public GameObject player;
+
+    void OnTriggerEnter2D(Collider2D otherObject)
+    {
+        Debug.Log("Hallo");
+        if (otherObject.tag == "Player")
+        {
+            otherObject.gameObject.GetComponent<Charactercontroller>().andStayDead();
+            
+        }
+    }
 }
+
