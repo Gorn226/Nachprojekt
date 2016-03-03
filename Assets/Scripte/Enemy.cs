@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     public float enemyHitSpeed = 4;
     private bool OnHit = false;
     Animator animator;
-    private float speedLastFrame;
+    public float speedLastFrame;
     Rigidbody2D rb2d;
     // Use this for initialization
     void Awake()
@@ -33,9 +33,13 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("turnSpeed", turnSpeed);
         transform.Translate(Vector3.right * amToMove);
         animator.SetBool("OnHit", OnHit);
+        animator.SetInteger("lives", lives);
         //LoseLife();
-        speedLastFrame= rb2d.
 
+    }
+    void LastUpdate()
+    {
+        speedLastFrame = rb2d.velocity.x;
     }
 
     void OnTriggerEnter2D(Collider2D otherObject)
@@ -45,8 +49,6 @@ public class Enemy : MonoBehaviour
             turnSpeed = 0;
             StartCoroutine(turn());
             enemySpeed *= -1;
-
-            
         }
         if (otherObject.gameObject.tag == "Sword" && lives > 0 && st == state.normal)
         {
@@ -94,9 +96,12 @@ public class Enemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (enemySpeed > enemySpeedstart)
+        if (Mathf.Abs(enemySpeed) > enemySpeedstart)
         {
-            enemySpeed -= 0.1f;
+            if (enemySpeed <= 0)
+                enemySpeed += 0.1f;
+            else
+                enemySpeed -= 0.1f; 
         }
     }
     IEnumerator hit()
