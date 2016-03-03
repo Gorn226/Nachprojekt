@@ -63,10 +63,27 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        UserInput();
+        InventoryControl();
+        UseItem();
     }
 
-    private void UserInput()
+    private void UseItem()
+    {
+        if (Input.GetButtonDown("Pot"))
+        {
+            if (potInventory[currentPot].stacks > 1)
+                potInventory[currentPot].stacks--;
+            else
+            {
+                potInventory.Remove(potInventory[currentPot]);
+                if (currentPot == potInventory.Count && potInventory.Count > 1)
+                    currentPot -= 1;
+            }
+        }
+        DrawSlots();
+    }
+
+    private void InventoryControl()
     {
         if (Input.GetButtonDown("MenuHorizontal"))
         {
@@ -110,12 +127,18 @@ public class Inventory : MonoBehaviour
         Slots[0].transform.GetComponent<Image>().sprite = slotBasic;
         if (weaponInventory.Count != 0)
             Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = weaponInventory[currentWeapon].itemIcon;
+        else
+            Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = slotBasic;
         Slots[1].transform.GetComponent<Image>().sprite = slotBasic;
         if (shieldInventory.Count != 0)
             Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = shieldInventory[currentShield].itemIcon;
+        else
+            Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = slotBasic;
         Slots[2].transform.GetComponent<Image>().sprite = slotBasic;
         if (potInventory.Count != 0)
             Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = potInventory[currentPot].itemIcon;
+        else
+            Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = slotBasic;
         Slots[3].transform.GetComponent<Image>().sprite = slotBasic;
         Slots[currentPosition].transform.GetComponent<Image>().sprite = slotSelected;
     }
