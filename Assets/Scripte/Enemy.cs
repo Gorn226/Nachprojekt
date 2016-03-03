@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private state st = state.normal;
     public float enemySpeedstart = 2;
     public float enemySpeed;
+    public float actualSpeed;
     public int turnSpeed = 1;
     public int lives = 3;
     public float wasHitForce = 5000;
@@ -16,12 +17,13 @@ public class Enemy : MonoBehaviour
     Animator animator;
     private float speedLastFrame;
     Rigidbody2D rb2d;
-    private bool faceRight =true;
+    private bool faceRight = true;
 
     // Use this for initialization
     void Awake()
     {
         enemySpeed = enemySpeedstart;
+        actualSpeed = enemySpeedstart;
     }
     void Start()
     {
@@ -37,18 +39,19 @@ public class Enemy : MonoBehaviour
         animator.SetBool("OnHit", OnHit);
         animator.SetInteger("lives", lives);
         //LoseLife();
-       // speedLastFrame= rb2d.
+        // speedLastFrame= rb2d.
     }
 
     void OnTriggerEnter2D(Collider2D otherObject)
     {
         if (otherObject.tag == "Grenze")
-        {        
+        {
             turnSpeed = 0;
             StartCoroutine(turn());
-            enemySpeed *= -1;
+            enemySpeed = -1 * actualSpeed;
+            actualSpeed *= -1;
             faceRight = !faceRight;
-            
+
         }
         if (otherObject.gameObject.tag == "Sword" && lives > 0 && st == state.normal)
         {
@@ -96,28 +99,27 @@ public class Enemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log("enemySpeed "+enemySpeed);
-        if (faceRight && Mathf.Abs(enemySpeed) > enemySpeedstart)
+
+        if (lives != 0 && ((actualSpeed > 0 && actualSpeed > enemySpeed) || (actualSpeed < 0 && actualSpeed > enemySpeed)))
         {
             enemySpeed += 0.1f;
         }
-        else 
+
+        if (lives != 0 && ((actualSpeed > 0 && actualSpeed < enemySpeed) || (actualSpeed < 0 && actualSpeed < enemySpeed)))
         {
-            if (!faceRight && Mathf.Abs(enemySpeed) > enemySpeedstart)
-            {
-                enemySpeed -= 0.1f;
-            }
+            enemySpeed -= 0.1f;
         }
+
     }
     IEnumerator hit()
     {
         OnHit = true;
-        yield return new WaitForSeconds(50/((enemyHitSpeed-enemySpeedstart)/0.1f));
+        yield return new WaitForSeconds(50 / ((enemyHitSpeed - enemySpeedstart) / 0.1f));
         if (faceRight)
         {
             enemySpeed = enemySpeedstart;
         }
-        else 
+        else
         {
             enemySpeed = -1 * enemySpeedstart;
         }
