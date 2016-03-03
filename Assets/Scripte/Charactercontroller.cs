@@ -31,7 +31,7 @@ public class Charactercontroller : MonoBehaviour
     public float gravityPlus =0f;
 
     public float wasHitForce=5000;
-
+    public float knightSpeed;
     Animator animator;
 
     public bool death = false;
@@ -45,10 +45,11 @@ public class Charactercontroller : MonoBehaviour
     }
     void Start()
     {
-        groundCheck = new Vector3(0, transform.localScale.y * 0.5f + 0.5f, 0);
+        
         shield.SetActive(false);
         sword.SetActive(false);
         animator = GetComponent<Animator>();
+        groundCheck = new Vector3(0, transform.localScale.y * 0.5f + 0.5f, 0);
         animator.SetBool("hitting", hitting);
         animator.SetBool("grounded", grounded);
         animator.SetBool("death", death);
@@ -59,8 +60,10 @@ public class Charactercontroller : MonoBehaviour
     void Update()
     {
 
-
+        knightSpeed = rb2d.velocity.x;
+        animator.SetFloat("knightSpeed", knightSpeed);
         grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
+       // Debug.Log("Danach: " + grounded);
         animator.SetBool("grounded", grounded);
 
         if (Input.GetButtonDown("Jump") && grounded)
@@ -115,6 +118,8 @@ public class Charactercontroller : MonoBehaviour
         armed = true;
         sword.SetActive(true);
         hitting = true;
+        animator.SetBool("hitting", hitting);
+
         yield return new WaitForSeconds(1.5f);
         sword.SetActive(false);
         hitting = false;
@@ -130,7 +135,7 @@ public class Charactercontroller : MonoBehaviour
 
     IEnumerator deathdelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         Application.LoadLevel("Endscreen");
     }
 
