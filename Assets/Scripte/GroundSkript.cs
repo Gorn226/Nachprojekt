@@ -4,12 +4,13 @@ using System.Collections;
 public class GroundSkript : MonoBehaviour {
 
     public BoxCollider2D bCol;
-    public GameObject player;
+    private GameObject player;
     float pY;
 
 	// Use this for initialization
 	void Start () 
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         bCol.enabled = false;
         pY = player.transform.position.y;
 	}

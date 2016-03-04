@@ -60,8 +60,11 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        //TODO Inventar in die nächste szene übernehmen
-        DontDestroyOnLoad(gameObject);
+        //if (potInventory == null)
+        //    potInventory = new List<Item>();
+        //Inventar in die nächste szene übernehmen
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Inventory"));
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Player"));
 
         //testet ob der spieler ein schild bzw. schwert besitzt
         if (shieldInventory.Count < 1)

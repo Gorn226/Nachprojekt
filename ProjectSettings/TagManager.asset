@@ -9,6 +9,7 @@ TagManager:
   - Sword
   - Shield
   - Enemy
+  - Inventory
   layers:
   - Default
   - TransparentFX
