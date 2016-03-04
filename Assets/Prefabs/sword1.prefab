@@ -57,7 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 100
   type: 0
-  itemIcon: {fileID: 21300000, guid: 5cb576bc519f77849a6d5cac5bdcf5c1, type: 3}
+  itemIcon: {fileID: 21300000, guid: b61b1d8746da30440831dbffb7a6bb19, type: 3}
   stacks: 0
   value: 20
 --- !u!212 &21268204
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5cb576bc519f77849a6d5cac5bdcf5c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b61b1d8746da30440831dbffb7a6bb19, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
