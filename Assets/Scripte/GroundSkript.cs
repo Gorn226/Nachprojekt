@@ -15,18 +15,19 @@ public class GroundSkript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
-    {   
-        pY = player.transform.position.y-player.transform.localScale.y/2-0.5f;
-        if (pY > (transform.position.y - transform.localScale.y / 2))
+	void FixedUpdate ()
+    {
+       
+        pY = player.transform.position.y-player.transform.localScale.y/2f+0.1f;
+        if (pY > ((bCol.bounds.center.y + bCol.bounds.extents.y / 2f)-0.3f))
         {
-            
             bCol.enabled = true;
         }
         else 
         {
-            bCol.enabled = false;
+           bCol.enabled = false;
         }
+      //  Debug.Log(("PY " + pY + " Ground " + (bCol.transform.position.y + bCol.transform.localScale.y / 2)-0.1f) + " "+ bCol.enabled);
 	    
 	}
 }
