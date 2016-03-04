@@ -41,6 +41,7 @@ public class Charactercontroller : MonoBehaviour
     Animator animator;
 
     public bool death = false;
+    public bool isWall = false;
 
     // Use this for initialization
     void Awake()
@@ -216,7 +217,7 @@ public class Charactercontroller : MonoBehaviour
         }
         height = transform.position.y;
 
-        if (h * rb2d.velocity.x < maxSpeed)
+        if (h * rb2d.velocity.x < maxSpeed&& !isWall)
             rb2d.AddForce(Vector2.right * h * moveForce);
         //maximale Geschwindigkeit
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
