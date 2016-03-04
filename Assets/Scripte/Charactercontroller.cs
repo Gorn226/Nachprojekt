@@ -29,7 +29,7 @@ public class Charactercontroller : MonoBehaviour
     bool groundedRight = false;
     bool groundedLeft = false;
     Vector3 vec;
-    public BoxCollider2D b2D;
+    private BoxCollider2D b2D;
 
     private bool grounded = false;
     Rigidbody2D rb2d;
