@@ -72,9 +72,7 @@ public class Charactercontroller : MonoBehaviour
         knightSpeed = Mathf.Abs(rb2d.velocity.x);
         animator.SetFloat("knightSpeed", knightSpeed);
         groundedRight = Physics2D.Linecast(transform.position +vec, transform.position +vec - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
-        Debug.DrawLine(transform.position + vec, transform.position + vec - groundCheck);
         groundedLeft = Physics2D.Linecast(transform.position - vec, transform.position - vec - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
-        Debug.DrawLine(transform.position - vec, transform.position - vec - groundCheck);
         grounded = groundedLeft || groundedRight;
         // Debug.Log("Danach: " + grounded);
         animator.SetBool("grounded", grounded);
@@ -207,7 +205,6 @@ public class Charactercontroller : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
         float h = Input.GetAxis("Horizontal");
 
         // Schneller fallen
