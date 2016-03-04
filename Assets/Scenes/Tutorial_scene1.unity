@@ -1825,6 +1825,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1 &308823262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 308823265}
+  - 61: {fileID: 308823264}
+  - 114: {fileID: 308823263}
+  m_Layer: 0
+  m_Name: Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &308823263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 308823262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01484b5d1699e3e47b8c69e022f3c025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Tutorial2
+--- !u!61 &308823264
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 308823262}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.49105453, y: 0.779912}
+  serializedVersion: 2
+  m_Size: {x: 1.9821067, y: 4.1774197}
+--- !u!4 &308823265
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 308823262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 51.02, y: -3.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 69
 --- !u!1 &333943315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,7 +2280,6 @@ MonoBehaviour:
   hasSword: 1
   shield: {fileID: 1252620839}
   sword: {fileID: 959859631}
-  b2D: {fileID: 0}
   height: 0
   gravityPlus: 1.1
   wasHitForce: 10000
@@ -4852,7 +4906,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bCol: {fileID: 888197293}
-  player: {fileID: 401030334}
 --- !u!1 &889154985
 GameObject:
   m_ObjectHideFlags: 0

@@ -7712,7 +7712,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 40
+  m_RootOrder: 41
 --- !u!1 &760342862
 GameObject:
   m_ObjectHideFlags: 0
@@ -12915,7 +12915,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 38
 --- !u!1 &1331322004
 GameObject:
   m_ObjectHideFlags: 0
@@ -15087,7 +15087,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 47
+  m_RootOrder: 49
 --- !u!1 &1582596852 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 158898, guid: 0301d84786e25574486f01444650fc35, type: 2}
@@ -16403,7 +16403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01484b5d1699e3e47b8c69e022f3c025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: PrincessRoom
+  name: Hauptszene
 --- !u!61 &1714206244
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17379,7 +17379,7 @@ Transform:
   m_Children:
   - {fileID: 237323336}
   m_Father: {fileID: 0}
-  m_RootOrder: 64
+  m_RootOrder: 65
 --- !u!1001 &1842659491
 Prefab:
   m_ObjectHideFlags: 0
