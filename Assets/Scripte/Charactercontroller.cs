@@ -16,7 +16,7 @@ public class Charactercontroller : MonoBehaviour
     public float moveForce = 365f;
     public float maxSpeed = 5f;
     public float jumpForce = 100f;
-    public Vector3 groundCheck;
+    private Vector3 groundCheck;
     public int health = 3;
     public float invinTime =0.5f; // Zeit wie Lange man unverwuntbar ist
     public bool armed = false;
@@ -26,7 +26,10 @@ public class Charactercontroller : MonoBehaviour
     bool shieldpresst = false;
     public GameObject sword;
     bool hitting = false;
-   
+    bool groundedRight = false;
+    bool groundedLeft = false;
+    Vector3 vec;
+    public BoxCollider2D b2D;
 
     private bool grounded = false;
     Rigidbody2D rb2d;
@@ -38,10 +41,12 @@ public class Charactercontroller : MonoBehaviour
     Animator animator;
 
     public bool death = false;
+    public bool isWall = false;
 
     // Use this for initialization
     void Awake()
     {
+        b2D = GetComponent<BoxCollider2D>();
         cam = GameObject.FindGameObjectWithTag("MainCamera");
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
@@ -53,11 +58,11 @@ public class Charactercontroller : MonoBehaviour
         shield.SetActive(false);
         sword.SetActive(false);
         animator = GetComponent<Animator>();
-        groundCheck = new Vector3(0, transform.localScale.y * 0.5f + 0.5f, 0);
+        groundCheck = new Vector3(0, b2D.bounds.extents.y+0.1f, 0);
         animator.SetBool("hitting", hitting);
         animator.SetBool("grounded", grounded);
         animator.SetBool("death", death);
-        
+        vec = new Vector3(b2D.bounds.extents.x,0,0);
     }
 
     // Update is called once per frame
@@ -66,8 +71,12 @@ public class Charactercontroller : MonoBehaviour
 
         knightSpeed = Mathf.Abs(rb2d.velocity.x);
         animator.SetFloat("knightSpeed", knightSpeed);
-        grounded = Physics2D.Linecast(transform.position, transform.position - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
-       // Debug.Log("Danach: " + grounded);
+        groundedRight = Physics2D.Linecast(transform.position +vec, transform.position +vec - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
+        Debug.DrawLine(transform.position + vec, transform.position + vec - groundCheck);
+        groundedLeft = Physics2D.Linecast(transform.position - vec, transform.position - vec - groundCheck, 1 << LayerMask.NameToLayer("Ground"));
+        Debug.DrawLine(transform.position - vec, transform.position - vec - groundCheck);
+        grounded = groundedLeft || groundedRight;
+        // Debug.Log("Danach: " + grounded);
         animator.SetBool("grounded", grounded);
 
         if (Input.GetButtonDown("Jump") && grounded)
@@ -208,7 +217,7 @@ public class Charactercontroller : MonoBehaviour
         }
         height = transform.position.y;
 
-        if (h * rb2d.velocity.x < maxSpeed)
+        if (h * rb2d.velocity.x < maxSpeed&& !isWall)
             rb2d.AddForce(Vector2.right * h * moveForce);
         //maximale Geschwindigkeit
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)

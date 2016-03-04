@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         //TODO Inventar in die nächste szene übernehmen
-        //DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Player"));
+        DontDestroyOnLoad(gameObject);
 
         //testet ob der spieler ein schild bzw. schwert besitzt
         if (shieldInventory.Count < 1)
@@ -180,10 +180,15 @@ public class Inventory : MonoBehaviour
         if (potInventory.Count != 0)
         {
             Slots[2].transform.GetChild(0).GetComponent<Image>().enabled = true;
+            Slots[2].transform.GetChild(1).GetComponent<Text>().enabled = true;
             Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = potInventory[currentPot].itemIcon;
+            Slots[2].transform.GetChild(1).GetComponent<Text>().text = "" + potInventory[currentPot].stacks;
         }
         else
+        {
             Slots[2].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            Slots[2].transform.GetChild(1).GetComponent<Text>().enabled = false;
+        }
         Slots[3].transform.GetComponent<Image>().sprite = slotBasic;
         if (itemInventory.Count != 0)
         {
