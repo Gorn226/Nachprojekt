@@ -160,6 +160,7 @@ public class Inventory : MonoBehaviour
 
     private void DrawSlots()
     {
+        //Waffenslot
         Slots[0].transform.GetComponent<Image>().sprite = slotBasic;
         if (weaponInventory.Count != 0)
         {
@@ -168,6 +169,7 @@ public class Inventory : MonoBehaviour
         }
         else
             Slots[0].transform.GetChild(0).GetComponent<Image>().enabled = false;
+        //Schildslot
         Slots[1].transform.GetComponent<Image>().sprite = slotBasic;
         if (shieldInventory.Count != 0)
         {
@@ -176,19 +178,23 @@ public class Inventory : MonoBehaviour
         }
         else
             Slots[1].transform.GetChild(0).GetComponent<Image>().enabled = false;
+        //Potslot
         Slots[2].transform.GetComponent<Image>().sprite = slotBasic;
         if (potInventory.Count != 0)
         {
             Slots[2].transform.GetChild(0).GetComponent<Image>().enabled = true;
             Slots[2].transform.GetChild(1).GetComponent<Text>().enabled = true;
+            Slots[2].transform.GetChild(2).GetComponent<Text>().enabled = true;
             Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = potInventory[currentPot].itemIcon;
             Slots[2].transform.GetChild(1).GetComponent<Text>().text = "" + potInventory[currentPot].stacks;
+            Slots[2].transform.GetChild(2).GetComponent<Text>().text = "" + potInventory[currentPot].stacks;
         }
         else
         {
             Slots[2].transform.GetChild(0).GetComponent<Image>().enabled = false;
             Slots[2].transform.GetChild(1).GetComponent<Text>().enabled = false;
         }
+        //Specialslot
         Slots[3].transform.GetComponent<Image>().sprite = slotBasic;
         if (itemInventory.Count != 0)
         {
