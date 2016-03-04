@@ -30,9 +30,17 @@ public class Heartskript : MonoBehaviour {
         {
             hearts[i].SetActive(false);
         }
-        for (int i = hearts.Length - 1; i >= halfhearts; i--)
+        for (int i = 0; i < fullhearts; i++)
         {
-            halfHearts[i].SetActive(false);
+            hearts[i].SetActive(true);
         }
+            for (int i = hearts.Length - 1; i >= halfhearts; i--)
+            {
+                halfHearts[i].SetActive(false);
+            }
+            for (int i = 0; i < halfhearts; i++)
+            {
+                halfHearts[i].SetActive(true);
+            }
     }
 }
