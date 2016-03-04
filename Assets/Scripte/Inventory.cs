@@ -165,19 +165,29 @@ public class Inventory : MonoBehaviour
         if (weaponInventory.Count != 0)
         {
             Slots[0].transform.GetChild(0).GetComponent<Image>().enabled = true;
+            Slots[0].transform.GetChild(1).GetComponent<Text>().enabled = true;
             Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = weaponInventory[currentWeapon].itemIcon;
+            Slots[0].transform.GetChild(1).GetComponent<Text>().text = "C";
         }
         else
+        {
             Slots[0].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            Slots[0].transform.GetChild(1).GetComponent<Text>().enabled = false;
+        }
         //Schildslot
         Slots[1].transform.GetComponent<Image>().sprite = slotBasic;
         if (shieldInventory.Count != 0)
         {
             Slots[1].transform.GetChild(0).GetComponent<Image>().enabled = true;
+            Slots[1].transform.GetChild(1).GetComponent<Text>().enabled = true;
             Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = shieldInventory[currentShield].itemIcon;
+            Slots[1].transform.GetChild(1).GetComponent<Text>().text = "V";
         }
         else
+        {
             Slots[1].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            Slots[1].transform.GetChild(1).GetComponent<Text>().enabled = false;
+        }
         //Potslot
         Slots[2].transform.GetComponent<Image>().sprite = slotBasic;
         if (potInventory.Count != 0)
@@ -187,12 +197,13 @@ public class Inventory : MonoBehaviour
             Slots[2].transform.GetChild(2).GetComponent<Text>().enabled = true;
             Slots[2].transform.GetChild(0).GetComponent<Image>().sprite = potInventory[currentPot].itemIcon;
             Slots[2].transform.GetChild(1).GetComponent<Text>().text = "" + potInventory[currentPot].stacks;
-            Slots[2].transform.GetChild(2).GetComponent<Text>().text = "" + potInventory[currentPot].stacks;
+            Slots[2].transform.GetChild(2).GetComponent<Text>().text = "B";
         }
         else
         {
             Slots[2].transform.GetChild(0).GetComponent<Image>().enabled = false;
-            Slots[2].transform.GetChild(1).GetComponent<Text>().enabled = false;
+            Slots[2].transform.GetChild(1).GetComponent<Text>().enabled = false; ;
+            Slots[2].transform.GetChild(2).GetComponent<Text>().enabled = false;
         }
         //Specialslot
         Slots[3].transform.GetComponent<Image>().sprite = slotBasic;
@@ -202,7 +213,10 @@ public class Inventory : MonoBehaviour
             Slots[3].transform.GetChild(0).GetComponent<Image>().sprite = itemInventory[currentItem].itemIcon;
         }
         else
+        {
             Slots[3].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            Slots[3].transform.GetChild(1).GetComponent<Text>().enabled = false;
+        }
         Slots[currentPosition].transform.GetComponent<Image>().sprite = slotSelected;
     }
 }
