@@ -19,7 +19,11 @@ public class GroundSkript : MonoBehaviour {
     {
        
         pY = player.transform.position.y-player.transform.localScale.y/2f+0.1f;
-        if (pY > ((bCol.bounds.center.y + bCol.bounds.extents.y / 2f)-1f))
+
+
+        if (pY > ((bCol.bounds.center.y + bCol.bounds.extents.y / 2f)-1.5f))
+
+
         {
             bCol.enabled = true;
         }
