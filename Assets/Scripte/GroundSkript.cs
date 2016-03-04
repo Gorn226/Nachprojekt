@@ -17,8 +17,8 @@ public class GroundSkript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {   
-        pY = player.transform.position.y-player.transform.localScale.y/2-0.5f;
-        if (pY > (transform.position.y - transform.localScale.y / 2))
+        pY = player.transform.position.y-player.transform.localScale.y/2;
+        if (pY > (bCol.transform.position.y + bCol.transform.localScale.y / 2))
         {
             
             bCol.enabled = true;

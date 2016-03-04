@@ -4,9 +4,11 @@ using System.Collections;
 public class Heartskript : MonoBehaviour {
     public GameObject[] hearts;
     public GameObject[] halfHearts;
+
 	// Use this for initialization
     void Awake()
     {
+
         for(int i =0; i<hearts.Length;i++)
         {
             halfHearts[i].SetActive(true);
