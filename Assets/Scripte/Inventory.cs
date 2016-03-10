@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour
     {
         //prüft ob ein Item aufgesammelt werden kann, pots können stacken
         if (col.tag == "Item")
+        {
             switch (col.GetComponent<Item>().type)
             {
                 case Item.itemType.Weapon:
@@ -53,9 +54,10 @@ public class Inventory : MonoBehaviour
                     itemInventory.Add(col.GetComponent<Item>());
                     break;
             }
-        //Zeichne das Inventar neu sobald ein Item aufgesammelt wurde, und zerstöre das Item
-        DrawSlots();
-        Destroy(col.gameObject);
+            //Zeichne das Inventar neu sobald ein Item aufgesammelt wurde, und zerstöre das Item
+            DrawSlots();
+            Destroy(col.gameObject);
+        }
     }
 
     void Start()
@@ -170,7 +172,7 @@ public class Inventory : MonoBehaviour
             Slots[0].transform.GetChild(0).GetComponent<Image>().enabled = true;
             Slots[0].transform.GetChild(1).GetComponent<Text>().enabled = true;
             Slots[0].transform.GetChild(0).GetComponent<Image>().sprite = weaponInventory[currentWeapon].itemIcon;
-            Slots[0].transform.GetChild(1).GetComponent<Text>().text = "C";
+            Slots[0].transform.GetChild(1).GetComponent<Text>().text = "V";
         }
         else
         {
@@ -184,7 +186,7 @@ public class Inventory : MonoBehaviour
             Slots[1].transform.GetChild(0).GetComponent<Image>().enabled = true;
             Slots[1].transform.GetChild(1).GetComponent<Text>().enabled = true;
             Slots[1].transform.GetChild(0).GetComponent<Image>().sprite = shieldInventory[currentShield].itemIcon;
-            Slots[1].transform.GetChild(1).GetComponent<Text>().text = "V";
+            Slots[1].transform.GetChild(1).GetComponent<Text>().text = "C";
         }
         else
         {

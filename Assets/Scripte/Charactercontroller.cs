@@ -18,7 +18,7 @@ public class Charactercontroller : MonoBehaviour
     public float jumpForce = 100f;
     private Vector3 groundCheck;
     public int health = 3;
-    public float invinTime =0.5f; // Zeit wie Lange man unverwuntbar ist
+    public float invinTime =0.5f; // Zeit wie Lange man unverwundbar ist
     public bool armed = false;
     public bool hasShield = false;
     public bool hasSword = true;
